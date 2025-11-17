@@ -21,7 +21,7 @@ powertrain(electric).
 powertrain(gasoline).
 powertrain(plug_in_hybrid).
 powertrain(diesel).
-powertrain(hybrid). 
+powertrain(hybrid).
 
 drivetrain(rwd).
 drivetrain(awd).
@@ -245,7 +245,7 @@ has_drivetrain(bmw_z4_m40i, rwd).
 has_drivetrain(bmw_i3_2024, rwd).
 has_drivetrain(bmw_i7_xdrive60, awd).
 has_drivetrain(bmw_xm_m_hybrid, awd).
-has_drivetrain(bmw_7_series_760i, rwd).
+has_drivetrain(bmw_7_series_760i, awd).
 has_drivetrain(bmw_6_series_gran_turismo, rwd).
 has_drivetrain(bmw_2_series_gran_coupe, rwd).
 has_drivetrain(bmw_m2_competition, rwd).
@@ -257,7 +257,7 @@ has_drivetrain(bmw_x7_xdrive40i, awd).
 has_drivetrain(bmw_z4_sdrive20i, rwd).
 has_drivetrain(bmw_x3_m40i, awd).
 has_drivetrain(bmw_x4_m40i, awd).
-has_drivetrain(bmw_ix3, awd).
+has_drivetrain(bmw_ix3, rwd).
 has_drivetrain(bmw_5_series_m550i, rwd).
 has_drivetrain(bmw_x6_xdrive30d, awd).
 has_drivetrain(bmw_118i, fwd).

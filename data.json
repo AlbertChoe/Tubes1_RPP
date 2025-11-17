@@ -183,7 +183,7 @@
       "series": "7 Series",
       "body_type": "Sedan",
       "powertrain": "Gasoline",
-      "drivetrain": "RWD",
+      "drivetrain": "AWD",
       "features": ["iDrive", "Driving Assistance Pro"],
       "performance": "M Performance"
     },
@@ -292,7 +292,7 @@
       "series": "i Series",
       "body_type": "SUV",
       "powertrain": "Electric",
-      "drivetrain": "AWD",
+      "drivetrain": "RWD",
       "features": ["xDrive", "iDrive"],
       "performance": "Standard"
     },

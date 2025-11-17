@@ -362,7 +362,7 @@
     :hasSeries :sevenSeries ;
     :hasBodyType :Sedan ;
     :hasPowertrain :Gasoline ;
-    :hasDrivetrain :RWD ;
+    :hasDrivetrain :AWD ;
     :hasFeature :iDrive , :DrivingAssistancePro ;
     :hasPerformance :MPerformance .
 
@@ -458,7 +458,7 @@
     :hasSeries :iSeries ;
     :hasBodyType :SUV ;
     :hasPowertrain :Electric ;
-    :hasDrivetrain :AWD ;
+    :hasDrivetrain :RWD ;
     :hasFeature :xDrive , :iDrive ;
     :hasPerformance :Standard .
 
