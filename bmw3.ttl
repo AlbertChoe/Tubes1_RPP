@@ -1,0 +1,559 @@
+@prefix : <http://example.org/bmw#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+
+<http://example.org/bmw> rdf:type owl:Ontology .
+
+### Classes
+
+:BMWModel rdf:type owl:Class .
+:Series rdf:type owl:Class .
+:BodyType rdf:type owl:Class .
+:Powertrain rdf:type owl:Class .
+:Drivetrain rdf:type owl:Class .
+:Feature rdf:type owl:Class .
+:Performance rdf:type owl:Class .
+
+:ElectricCar rdf:type owl:Class .
+:HybridCar rdf:type owl:Class .
+:PetrolCar rdf:type owl:Class .
+
+:HighPerformanceCar rdf:type owl:Class .
+:StandardCar rdf:type owl:Class .
+
+:AdvancedADASCar rdf:type owl:Class .
+:OffroadCapableSUV rdf:type owl:Class .
+
+:iSeriesCar rdf:type owl:Class .
+:ThreeSeriesCar rdf:type owl:Class .
+:XSeriesCar rdf:type owl:Class .
+
+
+### Object Properties
+
+:hasSeries rdf:type owl:ObjectProperty ; rdfs:domain :BMWModel ; rdfs:range :Series .
+:hasBodyType rdf:type owl:ObjectProperty ; rdfs:domain :BMWModel ; rdfs:range :BodyType .
+:hasPowertrain rdf:type owl:ObjectProperty ; rdfs:domain :BMWModel ; rdfs:range :Powertrain .
+:hasDrivetrain rdf:type owl:ObjectProperty ; rdfs:domain :BMWModel ; rdfs:range :Drivetrain .
+:hasFeature rdf:type owl:ObjectProperty ; rdfs:domain :BMWModel ; rdfs:range :Feature .
+:hasPerformance rdf:type owl:ObjectProperty ; rdfs:domain :BMWModel ; rdfs:range :Performance .
+
+
+# Subclass Axioms
+
+:Sedan rdfs:subClassOf :BodyType .
+:SUV rdfs:subClassOf :BodyType .
+:GranCoupe rdfs:subClassOf :BodyType .
+:Coupe rdfs:subClassOf :BodyType .
+:Convertible rdfs:subClassOf :BodyType .
+:Hatchback rdfs:subClassOf :BodyType .
+
+:Electric rdfs:subClassOf :Powertrain .
+:Gasoline rdfs:subClassOf :Powertrain .
+:PlugInHybrid rdfs:subClassOf :Powertrain .
+:Diesel rdfs:subClassOf :Powertrain .
+:Hybrid rdfs:subClassOf :Powertrain .
+
+:RWD rdfs:subClassOf :Drivetrain .
+:AWD rdfs:subClassOf :Drivetrain .
+:FWD rdfs:subClassOf :Drivetrain .
+
+:MSeries rdfs:subClassOf :Performance .
+:MPerformance rdfs:subClassOf :Performance .
+:Standard rdfs:subClassOf :Performance .
+
+
+# EquivalentClass Axioms
+
+:ElectricCar owl:equivalentClass [
+    rdf:type owl:Class ;
+    owl:intersectionOf ( :BMWModel [ owl:onProperty :hasPowertrain ; owl:someValuesFrom :Electric ] )
+] .
+
+:HybridCar owl:equivalentClass [
+    rdf:type owl:Class ;
+    owl:intersectionOf ( :BMWModel [ owl:onProperty :hasPowertrain ; owl:someValuesFrom :PlugInHybrid ] )
+] .
+
+:PetrolCar owl:equivalentClass [
+    rdf:type owl:Class ;
+    owl:intersectionOf ( :BMWModel [ owl:onProperty :hasPowertrain ; owl:someValuesFrom :Gasoline ] )
+] .
+
+:HighPerformanceCar owl:equivalentClass [
+    owl:intersectionOf (
+        :BMWModel
+        [ owl:unionOf (
+            [ owl:onProperty :hasPerformance ; owl:someValuesFrom :MSeries ]
+            [ owl:onProperty :hasPerformance ; owl:someValuesFrom :MPerformance ]
+        ) ]
+    )
+] .
+
+:StandardCar owl:equivalentClass [
+    owl:intersectionOf (
+        :BMWModel
+        [ owl:onProperty :hasPerformance ; owl:someValuesFrom :Standard ]
+    )
+] .
+
+:AdvancedADASCar owl:equivalentClass [
+    owl:intersectionOf (
+        :BMWModel
+        [ owl:onProperty :hasFeature ; owl:someValuesFrom :DrivingAssistancePro ]
+    )
+] .
+
+:OffroadCapableSUV owl:equivalentClass [
+    owl:intersectionOf (
+        :BMWModel
+        [ owl:onProperty :hasBodyType ; owl:someValuesFrom :SUV ]
+        [ owl:onProperty :hasFeature ; owl:someValuesFrom :xDrive ]
+    )
+] .
+
+:iSeriesCar owl:equivalentClass [
+    owl:intersectionOf (
+        :BMWModel
+        [ owl:onProperty :hasSeries ; owl:someValuesFrom :iSeries ]
+    )
+] .
+
+:ThreeSeriesCar owl:equivalentClass [
+    owl:intersectionOf (
+        :BMWModel
+        [ owl:onProperty :hasSeries ; owl:someValuesFrom :threeSeries ]
+    )
+] .
+
+:XSeriesCar owl:equivalentClass [
+    owl:intersectionOf (
+        :BMWModel
+        [ owl:onProperty :hasSeries ; owl:someValuesFrom :xSeries ]
+    )
+] .
+
+
+# Disjointness Axioms
+
+:SUV owl:disjointWith :Sedan .
+:ElectricCar owl:disjointWith :PetrolCar .
+:MSeries owl:disjointWith :MPerformance .
+:MPerformance owl:disjointWith :Standard .
+:MSeries owl:disjointWith :Standard .
+
+
+# Individuals - Series
+
+:iSeries rdf:type :Series .
+:threeSeries rdf:type :Series .
+:xSeries rdf:type :Series .
+:fiveSeries rdf:type :Series .
+:fourSeries rdf:type :Series .
+:oneSeries rdf:type :Series .
+:twoSeries rdf:type :Series .
+:sixSeries rdf:type :Series .
+:sevenSeries rdf:type :Series .
+:eightSeries rdf:type :Series .
+:zSeries rdf:type :Series .
+
+
+# Individuals - Body Types
+
+:Sedan rdf:type :BodyType .
+:SUV rdf:type :BodyType .
+:GranCoupe rdf:type :BodyType .
+:Coupe rdf:type :BodyType .
+:Convertible rdf:type :BodyType .
+:Hatchback rdf:type :BodyType .
+
+
+# Individuals - Powertrains
+
+:Electric rdf:type :Powertrain .
+:Gasoline rdf:type :Powertrain .
+:PlugInHybrid rdf:type :Powertrain .
+:Diesel rdf:type :Powertrain .
+:Hybrid rdf:type :Powertrain .
+
+
+# Individuals - Drivetrains
+
+:RWD rdf:type :Drivetrain .
+:AWD rdf:type :Drivetrain .
+:FWD rdf:type :Drivetrain .
+
+
+# Individuals - Features
+
+:iDrive rdf:type :Feature .
+:xDrive rdf:type :Feature .
+:DrivingAssistance rdf:type :Feature .
+:DrivingAssistancePro rdf:type :Feature .
+:MSportSuspension rdf:type :Feature .
+:PanoramicRoof rdf:type :Feature .
+
+
+# Individuals - Performance
+
+:Standard rdf:type :Performance .
+:MPerformance rdf:type :Performance .
+:MSeries rdf:type :Performance .
+
+
+# Individuals
+
+:i4M50 rdf:type :BMWModel ;
+    :hasSeries :iSeries ;
+    :hasBodyType :GranCoupe ;
+    :hasPowertrain :Electric ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :iDrive , :xDrive , :DrivingAssistancePro ;
+    :hasPerformance :MPerformance .
+
+:M3G80 rdf:type :BMWModel ;
+    :hasSeries :threeSeries ;
+    :hasBodyType :Sedan ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :iDrive , :MSportSuspension ;
+    :hasPerformance :MSeries .
+
+:X5xDrive45e rdf:type :BMWModel ;
+    :hasSeries :xSeries ;
+    :hasBodyType :SUV ;
+    :hasPowertrain :PlugInHybrid ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :xDrive , :DrivingAssistance , :PanoramicRoof ;
+    :hasPerformance :Standard .
+
+:BMW320iF30 rdf:type :BMWModel ;
+    :hasSeries :threeSeries ;
+    :hasBodyType :Sedan ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :iDrive ;
+    :hasPerformance :Standard .
+
+:iXxDrive50 rdf:type :BMWModel ;
+    :hasSeries :iSeries ;
+    :hasBodyType :SUV ;
+    :hasPowertrain :Electric ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :xDrive , :iDrive , :DrivingAssistancePro ;
+    :hasPerformance :Standard .
+
+:BMW530eG30 rdf:type :BMWModel ;
+    :hasSeries :fiveSeries ;
+    :hasBodyType :Sedan ;
+    :hasPowertrain :PlugInHybrid ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :iDrive , :DrivingAssistance ;
+    :hasPerformance :Standard .
+
+:BMWM5F90 rdf:type :BMWModel ;
+    :hasSeries :fiveSeries ;
+    :hasBodyType :Sedan ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :iDrive , :xDrive , :MSportSuspension , :DrivingAssistancePro ;
+    :hasPerformance :MSeries .
+
+:BMWX3xDrive30i rdf:type :BMWModel ;
+    :hasSeries :xSeries ;
+    :hasBodyType :SUV ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :xDrive , :PanoramicRoof , :DrivingAssistance ;
+    :hasPerformance :Standard .
+
+:BMWX1xDrive20i rdf:type :BMWModel ;
+    :hasSeries :xSeries ;
+    :hasBodyType :SUV ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :xDrive , :iDrive ;
+    :hasPerformance :Standard .
+
+:BMW420iGranCoupe rdf:type :BMWModel ;
+    :hasSeries :fourSeries ;
+    :hasBodyType :GranCoupe ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :iDrive , :DrivingAssistance ;
+    :hasPerformance :Standard .
+
+:BMWX2xDrive20i rdf:type :BMWModel ;
+    :hasSeries :xSeries ;
+    :hasBodyType :SUV ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :xDrive , :iDrive ;
+    :hasPerformance :Standard .
+
+:BMWX4xDrive30i rdf:type :BMWModel ;
+    :hasSeries :xSeries ;
+    :hasBodyType :SUV ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :xDrive , :PanoramicRoof ;
+    :hasPerformance :Standard .
+
+:BMWX6M50i rdf:type :BMWModel ;
+    :hasSeries :xSeries ;
+    :hasBodyType :SUV ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :xDrive , :MSportSuspension ;
+    :hasPerformance :MPerformance .
+
+:BMW8SeriesGranCoupe rdf:type :BMWModel ;
+    :hasSeries :eightSeries ;
+    :hasBodyType :GranCoupe ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :iDrive , :DrivingAssistancePro ;
+    :hasPerformance :MSeries .
+
+:BMWM4Competition rdf:type :BMWModel ;
+    :hasSeries :fourSeries ;
+    :hasBodyType :Coupe ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :MSportSuspension , :DrivingAssistancePro ;
+    :hasPerformance :MSeries .
+
+:BMWZ4M40i rdf:type :BMWModel ;
+    :hasSeries :zSeries ;
+    :hasBodyType :Convertible ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :MSportSuspension ;
+    :hasPerformance :MPerformance .
+
+:BMWi3_2024 rdf:type :BMWModel ;
+    :hasSeries :iSeries ;
+    :hasBodyType :Hatchback ;
+    :hasPowertrain :Electric ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :iDrive ;
+    :hasPerformance :Standard .
+
+:BMWi7xDrive60 rdf:type :BMWModel ;
+    :hasSeries :iSeries ;
+    :hasBodyType :Sedan ;
+    :hasPowertrain :Electric ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :iDrive , :DrivingAssistancePro ;
+    :hasPerformance :Standard .
+
+:BMWXMMHybrid rdf:type :BMWModel ;
+    :hasSeries :xSeries ;
+    :hasBodyType :SUV ;
+    :hasPowertrain :PlugInHybrid ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :xDrive , :MSportSuspension ;
+    :hasPerformance :MSeries .
+
+:BMW7Series760i rdf:type :BMWModel ;
+    :hasSeries :sevenSeries ;
+    :hasBodyType :Sedan ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :iDrive , :DrivingAssistancePro ;
+    :hasPerformance :MPerformance .
+
+:BMW6SeriesGranTurismo rdf:type :BMWModel ;
+    :hasSeries :sixSeries ;
+    :hasBodyType :GranCoupe ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :PanoramicRoof , :DrivingAssistance ;
+    :hasPerformance :Standard .
+
+:BMW2SeriesGranCoupe rdf:type :BMWModel ;
+    :hasSeries :twoSeries ;
+    :hasBodyType :GranCoupe ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :iDrive ;
+    :hasPerformance :Standard .
+
+:BMWM2Competition rdf:type :BMWModel ;
+    :hasSeries :twoSeries ;
+    :hasBodyType :Coupe ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :MSportSuspension ;
+    :hasPerformance :MSeries .
+
+:BMWi5eDrive40 rdf:type :BMWModel ;
+    :hasSeries :iSeries ;
+    :hasBodyType :Sedan ;
+    :hasPowertrain :Electric ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :iDrive , :DrivingAssistance ;
+    :hasPerformance :Standard .
+
+:BMW1SeriesM135i rdf:type :BMWModel ;
+    :hasSeries :oneSeries ;
+    :hasBodyType :Hatchback ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :xDrive ;
+    :hasPerformance :MPerformance .
+
+:BMW6SeriesGT630i rdf:type :BMWModel ;
+    :hasSeries :sixSeries ;
+    :hasBodyType :GranCoupe ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :PanoramicRoof ;
+    :hasPerformance :Standard .
+
+:BMWM8Competition rdf:type :BMWModel ;
+    :hasSeries :eightSeries ;
+    :hasBodyType :Coupe ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :MSportSuspension , :DrivingAssistancePro ;
+    :hasPerformance :MSeries .
+
+:BMWX7xDrive40i rdf:type :BMWModel ;
+    :hasSeries :xSeries ;
+    :hasBodyType :SUV ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :xDrive , :PanoramicRoof ;
+    :hasPerformance :Standard .
+
+:BMWZ4sDrive20i rdf:type :BMWModel ;
+    :hasSeries :zSeries ;
+    :hasBodyType :Convertible ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :iDrive ;
+    :hasPerformance :Standard .
+
+:BMWX3M40i rdf:type :BMWModel ;
+    :hasSeries :xSeries ;
+    :hasBodyType :SUV ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :xDrive , :MSportSuspension ;
+    :hasPerformance :MPerformance .
+
+:BMWX4M40i rdf:type :BMWModel ;
+    :hasSeries :xSeries ;
+    :hasBodyType :SUV ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :xDrive , :MSportSuspension ;
+    :hasPerformance :MPerformance .
+
+:BMWiX3 rdf:type :BMWModel ;
+    :hasSeries :iSeries ;
+    :hasBodyType :SUV ;
+    :hasPowertrain :Electric ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :xDrive , :iDrive ;
+    :hasPerformance :Standard .
+
+:BMW5SeriesM550i rdf:type :BMWModel ;
+    :hasSeries :fiveSeries ;
+    :hasBodyType :Sedan ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :MSportSuspension ;
+    :hasPerformance :MPerformance .
+
+:BMWX6xDrive30d rdf:type :BMWModel ;
+    :hasSeries :xSeries ;
+    :hasBodyType :SUV ;
+    :hasPowertrain :Diesel ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :xDrive ;
+    :hasPerformance :Standard .
+
+:BMW118i rdf:type :BMWModel ;
+    :hasSeries :oneSeries ;
+    :hasBodyType :Hatchback ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :FWD ;
+    :hasFeature :iDrive ;
+    :hasPerformance :Standard .
+
+:BMW230iCoupe rdf:type :BMWModel ;
+    :hasSeries :twoSeries ;
+    :hasBodyType :Coupe ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :iDrive ;
+    :hasPerformance :Standard .
+
+:BMW330e rdf:type :BMWModel ;
+    :hasSeries :threeSeries ;
+    :hasBodyType :Sedan ;
+    :hasPowertrain :PlugInHybrid ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :iDrive , :DrivingAssistance ;
+    :hasPerformance :Standard .
+
+:BMW540i rdf:type :BMWModel ;
+    :hasSeries :fiveSeries ;
+    :hasBodyType :Sedan ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :iDrive ;
+    :hasPerformance :Standard .
+
+:BMW750Li rdf:type :BMWModel ;
+    :hasSeries :sevenSeries ;
+    :hasBodyType :Sedan ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :RWD ;
+    :hasFeature :iDrive , :DrivingAssistance ;
+    :hasPerformance :Standard .
+
+:BMWX5MCompetition rdf:type :BMWModel ;
+    :hasSeries :xSeries ;
+    :hasBodyType :SUV ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :xDrive , :MSportSuspension ;
+    :hasPerformance :MSeries .
+
+:BMWM440iGranCoupe rdf:type :BMWModel ;
+    :hasSeries :fourSeries ;
+    :hasBodyType :GranCoupe ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :iDrive , :xDrive , :MSportSuspension ;
+    :hasPerformance :MPerformance .
+
+:BMWX2M35i rdf:type :BMWModel ;
+    :hasSeries :xSeries ;
+    :hasBodyType :SUV ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :xDrive , :MSportSuspension ;
+    :hasPerformance :MPerformance .
+
+:BMWi7M70 rdf:type :BMWModel ;
+    :hasSeries :iSeries ;
+    :hasBodyType :Sedan ;
+    :hasPowertrain :Electric ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :iDrive , :DrivingAssistancePro ;
+    :hasPerformance :MSeries .
+
+:BMWM850ixDrive rdf:type :BMWModel ;
+    :hasSeries :eightSeries ;
+    :hasBodyType :Coupe ;
+    :hasPowertrain :Gasoline ;
+    :hasDrivetrain :AWD ;
+    :hasFeature :xDrive , :MSportSuspension ;
+    :hasPerformance :MPerformance .

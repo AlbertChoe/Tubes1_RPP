@@ -1,0 +1,442 @@
+{
+  "models": [
+    {
+      "name": "BMW i4 M50",
+      "series": "i Series",
+      "body_type": "Gran Coupe",
+      "powertrain": "Electric",
+      "drivetrain": "AWD",
+      "features": ["iDrive", "xDrive", "Driving Assistance Pro"],
+      "performance": "M Performance"
+    },
+    {
+      "name": "BMW M3 G80",
+      "series": "3 Series",
+      "body_type": "Sedan",
+      "powertrain": "Gasoline",
+      "drivetrain": "RWD",
+      "features": ["iDrive", "M Sport Suspension"],
+      "performance": "M Series"
+    },
+    {
+      "name": "BMW X5 xDrive45e",
+      "series": "X Series",
+      "body_type": "SUV",
+      "powertrain": "Plug-in Hybrid",
+      "drivetrain": "AWD",
+      "features": ["xDrive", "Driving Assistance", "Panoramic Roof"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW 320i F30",
+      "series": "3 Series",
+      "body_type": "Sedan",
+      "powertrain": "Gasoline",
+      "drivetrain": "RWD",
+      "features": ["iDrive"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW iX xDrive50",
+      "series": "i Series",
+      "body_type": "SUV",
+      "powertrain": "Electric",
+      "drivetrain": "AWD",
+      "features": ["xDrive", "iDrive", "Driving Assistance Pro"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW 530e G30",
+      "series": "5 Series",
+      "body_type": "Sedan",
+      "powertrain": "Plug-in Hybrid",
+      "drivetrain": "AWD",
+      "features": ["iDrive", "Driving Assistance"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW M5 F90",
+      "series": "5 Series",
+      "body_type": "Sedan",
+      "powertrain": "Gasoline",
+      "drivetrain": "AWD",
+      "features": [
+        "iDrive",
+        "xDrive",
+        "M Sport Suspension",
+        "Driving Assistance Pro"
+      ],
+      "performance": "M Series"
+    },
+    {
+      "name": "BMW X3 xDrive30i",
+      "series": "X Series",
+      "body_type": "SUV",
+      "powertrain": "Gasoline",
+      "drivetrain": "AWD",
+      "features": ["xDrive", "Panoramic Roof", "Driving Assistance"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW X1 xDrive20i",
+      "series": "X Series",
+      "body_type": "SUV",
+      "powertrain": "Gasoline",
+      "drivetrain": "AWD",
+      "features": ["xDrive", "iDrive"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW 420i Gran Coupe",
+      "series": "4 Series",
+      "body_type": "Gran Coupe",
+      "powertrain": "Gasoline",
+      "drivetrain": "RWD",
+      "features": ["iDrive", "Driving Assistance"],
+      "performance": "Standard"
+    },
+
+    {
+      "name": "BMW X2 xDrive20i",
+      "series": "X Series",
+      "body_type": "SUV",
+      "powertrain": "Gasoline",
+      "drivetrain": "AWD",
+      "features": ["xDrive", "iDrive"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW X4 xDrive30i",
+      "series": "X Series",
+      "body_type": "SUV",
+      "powertrain": "Gasoline",
+      "drivetrain": "AWD",
+      "features": ["xDrive", "Panoramic Roof"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW X6 M50i",
+      "series": "X Series",
+      "body_type": "SUV",
+      "powertrain": "Gasoline",
+      "drivetrain": "AWD",
+      "features": ["xDrive", "M Sport Suspension"],
+      "performance": "M Performance"
+    },
+    {
+      "name": "BMW 8 Series Gran Coupe",
+      "series": "8 Series",
+      "body_type": "Gran Coupe",
+      "powertrain": "Gasoline",
+      "drivetrain": "RWD",
+      "features": ["iDrive", "Driving Assistance Pro"],
+      "performance": "M Series"
+    },
+    {
+      "name": "BMW M4 Competition",
+      "series": "4 Series",
+      "body_type": "Coupe",
+      "powertrain": "Gasoline",
+      "drivetrain": "RWD",
+      "features": ["M Sport Suspension", "Driving Assistance Pro"],
+      "performance": "M Series"
+    },
+    {
+      "name": "BMW Z4 M40i",
+      "series": "Z Series",
+      "body_type": "Convertible",
+      "powertrain": "Gasoline",
+      "drivetrain": "RWD",
+      "features": ["M Sport Suspension"],
+      "performance": "M Performance"
+    },
+    {
+      "name": "BMW i3 (2024)",
+      "series": "i Series",
+      "body_type": "Hatchback",
+      "powertrain": "Electric",
+      "drivetrain": "RWD",
+      "features": ["iDrive"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW i7 xDrive60",
+      "series": "i Series",
+      "body_type": "Sedan",
+      "powertrain": "Electric",
+      "drivetrain": "AWD",
+      "features": ["iDrive", "Driving Assistance Pro"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW XM M Hybrid",
+      "series": "X Series",
+      "body_type": "SUV",
+      "powertrain": "Plug-in Hybrid",
+      "drivetrain": "AWD",
+      "features": ["xDrive", "M Sport Suspension"],
+      "performance": "M Series"
+    },
+
+    {
+      "name": "BMW 7 Series 760i",
+      "series": "7 Series",
+      "body_type": "Sedan",
+      "powertrain": "Gasoline",
+      "drivetrain": "RWD",
+      "features": ["iDrive", "Driving Assistance Pro"],
+      "performance": "M Performance"
+    },
+    {
+      "name": "BMW 6 Series Gran Turismo",
+      "series": "6 Series",
+      "body_type": "Gran Coupe",
+      "powertrain": "Gasoline",
+      "drivetrain": "RWD",
+      "features": ["Panoramic Roof", "Driving Assistance"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW 2 Series Gran Coupe",
+      "series": "2 Series",
+      "body_type": "Gran Coupe",
+      "powertrain": "Gasoline",
+      "drivetrain": "RWD",
+      "features": ["iDrive"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW M2 Competition",
+      "series": "2 Series",
+      "body_type": "Coupe",
+      "powertrain": "Gasoline",
+      "drivetrain": "RWD",
+      "features": ["M Sport Suspension"],
+      "performance": "M Series"
+    },
+    {
+      "name": "BMW i5 eDrive40",
+      "series": "i Series",
+      "body_type": "Sedan",
+      "powertrain": "Electric",
+      "drivetrain": "RWD",
+      "features": ["iDrive", "Driving Assistance"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW 1 Series M135i",
+      "series": "1 Series",
+      "body_type": "Hatchback",
+      "powertrain": "Gasoline",
+      "drivetrain": "AWD",
+      "features": ["xDrive"],
+      "performance": "M Performance"
+    },
+
+    {
+      "name": "BMW 6 Series GT 630i",
+      "series": "6 Series",
+      "body_type": "Gran Coupe",
+      "powertrain": "Gasoline",
+      "drivetrain": "RWD",
+      "features": ["Panoramic Roof"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW M8 Competition",
+      "series": "8 Series",
+      "body_type": "Coupe",
+      "powertrain": "Gasoline",
+      "drivetrain": "RWD",
+      "features": ["M Sport Suspension", "Driving Assistance Pro"],
+      "performance": "M Series"
+    },
+    {
+      "name": "BMW X7 xDrive40i",
+      "series": "X Series",
+      "body_type": "SUV",
+      "powertrain": "Gasoline",
+      "drivetrain": "AWD",
+      "features": ["xDrive", "Panoramic Roof"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW Z4 sDrive20i",
+      "series": "Z Series",
+      "body_type": "Convertible",
+      "powertrain": "Gasoline",
+      "drivetrain": "RWD",
+      "features": ["iDrive"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW X3 M40i",
+      "series": "X Series",
+      "body_type": "SUV",
+      "powertrain": "Gasoline",
+      "drivetrain": "AWD",
+      "features": ["xDrive", "M Sport Suspension"],
+      "performance": "M Performance"
+    },
+    {
+      "name": "BMW X4 M40i",
+      "series": "X Series",
+      "body_type": "SUV",
+      "powertrain": "Gasoline",
+      "drivetrain": "AWD",
+      "features": ["xDrive", "M Sport Suspension"],
+      "performance": "M Performance"
+    },
+    {
+      "name": "BMW iX3",
+      "series": "i Series",
+      "body_type": "SUV",
+      "powertrain": "Electric",
+      "drivetrain": "AWD",
+      "features": ["xDrive", "iDrive"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW 5 Series M550i",
+      "series": "5 Series",
+      "body_type": "Sedan",
+      "powertrain": "Gasoline",
+      "drivetrain": "RWD",
+      "features": ["M Sport Suspension"],
+      "performance": "M Performance"
+    },
+    {
+      "name": "BMW X6 xDrive30d",
+      "series": "X Series",
+      "body_type": "SUV",
+      "powertrain": "Diesel",
+      "drivetrain": "AWD",
+      "features": ["xDrive"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW 118i",
+      "series": "1 Series",
+      "body_type": "Hatchback",
+      "powertrain": "Gasoline",
+      "drivetrain": "FWD",
+      "features": ["iDrive"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW 230i Coupe",
+      "series": "2 Series",
+      "body_type": "Coupe",
+      "powertrain": "Gasoline",
+      "drivetrain": "RWD",
+      "features": ["iDrive"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW 330e",
+      "series": "3 Series",
+      "body_type": "Sedan",
+      "powertrain": "Plug-in Hybrid",
+      "drivetrain": "RWD",
+      "features": ["iDrive", "Driving Assistance"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW 540i",
+      "series": "5 Series",
+      "body_type": "Sedan",
+      "powertrain": "Gasoline",
+      "drivetrain": "RWD",
+      "features": ["iDrive"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW 750Li",
+      "series": "7 Series",
+      "body_type": "Sedan",
+      "powertrain": "Gasoline",
+      "drivetrain": "RWD",
+      "features": ["iDrive", "Driving Assistance"],
+      "performance": "Standard"
+    },
+    {
+      "name": "BMW X5 M Competition",
+      "series": "X Series",
+      "body_type": "SUV",
+      "powertrain": "Gasoline",
+      "drivetrain": "AWD",
+      "features": ["xDrive", "M Sport Suspension"],
+      "performance": "M Series"
+    },
+    {
+      "name": "BMW M440i Gran Coupe",
+      "series": "4 Series",
+      "body_type": "Gran Coupe",
+      "powertrain": "Gasoline",
+      "drivetrain": "AWD",
+      "features": ["iDrive", "xDrive", "M Sport Suspension"],
+      "performance": "M Performance"
+    },
+    {
+      "name": "BMW X2 M35i",
+      "series": "X Series",
+      "body_type": "SUV",
+      "powertrain": "Gasoline",
+      "drivetrain": "AWD",
+      "features": ["xDrive", "M Sport Suspension"],
+      "performance": "M Performance"
+    },
+    {
+      "name": "BMW i7 M70",
+      "series": "i Series",
+      "body_type": "Sedan",
+      "powertrain": "Electric",
+      "drivetrain": "AWD",
+      "features": ["iDrive", "Driving Assistance Pro"],
+      "performance": "M Series"
+    },
+    {
+      "name": "BMW M850i xDrive",
+      "series": "8 Series",
+      "body_type": "Coupe",
+      "powertrain": "Gasoline",
+      "drivetrain": "AWD",
+      "features": ["xDrive", "M Sport Suspension"],
+      "performance": "M Performance"
+    }
+  ],
+
+  "body_types": [
+    "Sedan",
+    "SUV",
+    "Coupe",
+    "Gran Coupe",
+    "Convertible",
+    "Hatchback"
+  ],
+  "powertrains": ["Gasoline", "Diesel", "Hybrid", "Plug-in Hybrid", "Electric"],
+  "drivetrains": ["FWD", "RWD", "AWD"],
+  "series": [
+    "1 Series",
+    "2 Series",
+    "3 Series",
+    "4 Series",
+    "5 Series",
+    "6 Series",
+    "7 Series",
+    "8 Series",
+    "X Series",
+    "i Series",
+    "M Series",
+    "Z Series"
+  ],
+  "performances": ["Standard", "M Performance", "M Series"],
+  "features": [
+    "xDrive",
+    "iDrive",
+    "Driving Assistance",
+    "Driving Assistance Pro",
+    "M Sport Suspension",
+    "Panoramic Roof"
+  ]
+}
