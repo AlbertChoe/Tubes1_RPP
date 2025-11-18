@@ -7,10 +7,10 @@
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="http://example.org/bmw"/>
-    
 
 
-    <!-- 
+
+    <!--
     ///////////////////////////////////////////////////////////////////////////////////////
     //
     // Object Properties
@@ -18,7 +18,7 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    
+
 
 
     <!-- http://example.org/bmw#hasBodyType -->
@@ -27,7 +27,7 @@
         <rdfs:domain rdf:resource="http://example.org/bmw#BMWModel"/>
         <rdfs:range rdf:resource="http://example.org/bmw#BodyType"/>
     </owl:ObjectProperty>
-    
+
 
 
     <!-- http://example.org/bmw#hasDrivetrain -->
@@ -36,7 +36,7 @@
         <rdfs:domain rdf:resource="http://example.org/bmw#BMWModel"/>
         <rdfs:range rdf:resource="http://example.org/bmw#Drivetrain"/>
     </owl:ObjectProperty>
-    
+
 
 
     <!-- http://example.org/bmw#hasFeature -->
@@ -45,7 +45,7 @@
         <rdfs:domain rdf:resource="http://example.org/bmw#BMWModel"/>
         <rdfs:range rdf:resource="http://example.org/bmw#Feature"/>
     </owl:ObjectProperty>
-    
+
 
 
     <!-- http://example.org/bmw#hasPerformance -->
@@ -54,7 +54,7 @@
         <rdfs:domain rdf:resource="http://example.org/bmw#BMWModel"/>
         <rdfs:range rdf:resource="http://example.org/bmw#Performance"/>
     </owl:ObjectProperty>
-    
+
 
 
     <!-- http://example.org/bmw#hasPowertrain -->
@@ -63,7 +63,7 @@
         <rdfs:domain rdf:resource="http://example.org/bmw#BMWModel"/>
         <rdfs:range rdf:resource="http://example.org/bmw#Powertrain"/>
     </owl:ObjectProperty>
-    
+
 
 
     <!-- http://example.org/bmw#hasSeries -->
@@ -72,10 +72,10 @@
         <rdfs:domain rdf:resource="http://example.org/bmw#BMWModel"/>
         <rdfs:range rdf:resource="http://example.org/bmw#Series"/>
     </owl:ObjectProperty>
-    
 
 
-    <!-- 
+
+    <!--
     ///////////////////////////////////////////////////////////////////////////////////////
     //
     // Classes
@@ -83,7 +83,7 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    
+
 
 
     <!-- http://example.org/bmw#AWD -->
@@ -91,7 +91,7 @@
     <owl:Class rdf:about="http://example.org/bmw#AWD">
         <rdfs:subClassOf rdf:resource="http://example.org/bmw#Drivetrain"/>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#AdvancedADASCar -->
@@ -103,25 +103,25 @@
                     <rdf:Description rdf:about="http://example.org/bmw#BMWModel"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://example.org/bmw#hasFeature"/>
-                        <owl:someValuesFrom rdf:resource="http://example.org/bmw#DrivingAssistancePro"/>
+                        <owl:hasValue rdf:resource="http://example.org/bmw#DrivingAssistancePro"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#BMWModel -->
 
     <owl:Class rdf:about="http://example.org/bmw#BMWModel"/>
-    
+
 
 
     <!-- http://example.org/bmw#BodyType -->
 
     <owl:Class rdf:about="http://example.org/bmw#BodyType"/>
-    
+
 
 
     <!-- http://example.org/bmw#Convertible -->
@@ -129,7 +129,7 @@
     <owl:Class rdf:about="http://example.org/bmw#Convertible">
         <rdfs:subClassOf rdf:resource="http://example.org/bmw#BodyType"/>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#Coupe -->
@@ -137,7 +137,7 @@
     <owl:Class rdf:about="http://example.org/bmw#Coupe">
         <rdfs:subClassOf rdf:resource="http://example.org/bmw#BodyType"/>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#Diesel -->
@@ -145,19 +145,13 @@
     <owl:Class rdf:about="http://example.org/bmw#Diesel">
         <rdfs:subClassOf rdf:resource="http://example.org/bmw#Powertrain"/>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#Drivetrain -->
 
     <owl:Class rdf:about="http://example.org/bmw#Drivetrain"/>
-    
 
-
-    <!-- http://example.org/bmw#DrivingAssistancePro -->
-
-    <owl:Class rdf:about="http://example.org/bmw#DrivingAssistancePro"/>
-    
 
 
     <!-- http://example.org/bmw#Electric -->
@@ -165,7 +159,7 @@
     <owl:Class rdf:about="http://example.org/bmw#Electric">
         <rdfs:subClassOf rdf:resource="http://example.org/bmw#Powertrain"/>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#ElectricCar -->
@@ -177,14 +171,14 @@
                     <rdf:Description rdf:about="http://example.org/bmw#BMWModel"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://example.org/bmw#hasPowertrain"/>
-                        <owl:someValuesFrom rdf:resource="http://example.org/bmw#Electric"/>
+                        <owl:hasValue rdf:resource="http://example.org/bmw#Electric"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
         <owl:disjointWith rdf:resource="http://example.org/bmw#PetrolCar"/>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#FWD -->
@@ -192,13 +186,13 @@
     <owl:Class rdf:about="http://example.org/bmw#FWD">
         <rdfs:subClassOf rdf:resource="http://example.org/bmw#Drivetrain"/>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#Feature -->
 
     <owl:Class rdf:about="http://example.org/bmw#Feature"/>
-    
+
 
 
     <!-- http://example.org/bmw#Gasoline -->
@@ -206,7 +200,7 @@
     <owl:Class rdf:about="http://example.org/bmw#Gasoline">
         <rdfs:subClassOf rdf:resource="http://example.org/bmw#Powertrain"/>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#GranCoupe -->
@@ -214,7 +208,7 @@
     <owl:Class rdf:about="http://example.org/bmw#GranCoupe">
         <rdfs:subClassOf rdf:resource="http://example.org/bmw#BodyType"/>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#Hatchback -->
@@ -222,7 +216,7 @@
     <owl:Class rdf:about="http://example.org/bmw#Hatchback">
         <rdfs:subClassOf rdf:resource="http://example.org/bmw#BodyType"/>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#HighPerformanceCar -->
@@ -236,11 +230,11 @@
                         <owl:unionOf rdf:parseType="Collection">
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://example.org/bmw#hasPerformance"/>
-                                <owl:someValuesFrom rdf:resource="http://example.org/bmw#MPerformance"/>
+                                <owl:hasValue rdf:resource="http://example.org/bmw#MPerformance"/>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://example.org/bmw#hasPerformance"/>
-                                <owl:someValuesFrom rdf:resource="http://example.org/bmw#MSeries"/>
+                                <owl:hasValue rdf:resource="http://example.org/bmw#MSeries"/>
                             </owl:Restriction>
                         </owl:unionOf>
                     </owl:Class>
@@ -248,7 +242,7 @@
             </owl:Class>
         </owl:equivalentClass>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#Hybrid -->
@@ -256,7 +250,7 @@
     <owl:Class rdf:about="http://example.org/bmw#Hybrid">
         <rdfs:subClassOf rdf:resource="http://example.org/bmw#Powertrain"/>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#HybridCar -->
@@ -268,13 +262,13 @@
                     <rdf:Description rdf:about="http://example.org/bmw#BMWModel"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://example.org/bmw#hasPowertrain"/>
-                        <owl:someValuesFrom rdf:resource="http://example.org/bmw#PlugInHybrid"/>
+                        <owl:hasValue rdf:resource="http://example.org/bmw#PlugInHybrid"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#MPerformance -->
@@ -284,7 +278,7 @@
         <owl:disjointWith rdf:resource="http://example.org/bmw#MSeries"/>
         <owl:disjointWith rdf:resource="http://example.org/bmw#Standard"/>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#MSeries -->
@@ -293,7 +287,7 @@
         <rdfs:subClassOf rdf:resource="http://example.org/bmw#Performance"/>
         <owl:disjointWith rdf:resource="http://example.org/bmw#Standard"/>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#OffroadCapableSUV -->
@@ -305,23 +299,23 @@
                     <rdf:Description rdf:about="http://example.org/bmw#BMWModel"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://example.org/bmw#hasBodyType"/>
-                        <owl:someValuesFrom rdf:resource="http://example.org/bmw#SUV"/>
+                        <owl:hasValue rdf:resource="http://example.org/bmw#SUV"/>
                     </owl:Restriction>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://example.org/bmw#hasFeature"/>
-                        <owl:someValuesFrom rdf:resource="http://example.org/bmw#xDrive"/>
+                        <owl:hasValue rdf:resource="http://example.org/bmw#xDrive"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#Performance -->
 
     <owl:Class rdf:about="http://example.org/bmw#Performance"/>
-    
+
 
 
     <!-- http://example.org/bmw#PetrolCar -->
@@ -333,13 +327,13 @@
                     <rdf:Description rdf:about="http://example.org/bmw#BMWModel"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://example.org/bmw#hasPowertrain"/>
-                        <owl:someValuesFrom rdf:resource="http://example.org/bmw#Gasoline"/>
+                        <owl:hasValue rdf:resource="http://example.org/bmw#Gasoline"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#PlugInHybrid -->
@@ -347,13 +341,13 @@
     <owl:Class rdf:about="http://example.org/bmw#PlugInHybrid">
         <rdfs:subClassOf rdf:resource="http://example.org/bmw#Powertrain"/>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#Powertrain -->
 
     <owl:Class rdf:about="http://example.org/bmw#Powertrain"/>
-    
+
 
 
     <!-- http://example.org/bmw#RWD -->
@@ -361,7 +355,7 @@
     <owl:Class rdf:about="http://example.org/bmw#RWD">
         <rdfs:subClassOf rdf:resource="http://example.org/bmw#Drivetrain"/>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#SUV -->
@@ -370,7 +364,7 @@
         <rdfs:subClassOf rdf:resource="http://example.org/bmw#BodyType"/>
         <owl:disjointWith rdf:resource="http://example.org/bmw#Sedan"/>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#Sedan -->
@@ -378,13 +372,13 @@
     <owl:Class rdf:about="http://example.org/bmw#Sedan">
         <rdfs:subClassOf rdf:resource="http://example.org/bmw#BodyType"/>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#Series -->
 
     <owl:Class rdf:about="http://example.org/bmw#Series"/>
-    
+
 
 
     <!-- http://example.org/bmw#Standard -->
@@ -392,7 +386,7 @@
     <owl:Class rdf:about="http://example.org/bmw#Standard">
         <rdfs:subClassOf rdf:resource="http://example.org/bmw#Performance"/>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#StandardCar -->
@@ -404,13 +398,13 @@
                     <rdf:Description rdf:about="http://example.org/bmw#BMWModel"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://example.org/bmw#hasPerformance"/>
-                        <owl:someValuesFrom rdf:resource="http://example.org/bmw#Standard"/>
+                        <owl:hasValue rdf:resource="http://example.org/bmw#Standard"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#ThreeSeriesCar -->
@@ -422,13 +416,13 @@
                     <rdf:Description rdf:about="http://example.org/bmw#BMWModel"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://example.org/bmw#hasSeries"/>
-                        <owl:someValuesFrom rdf:resource="http://example.org/bmw#threeSeries"/>
+                        <owl:hasValue rdf:resource="http://example.org/bmw#threeSeries"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
     </owl:Class>
-    
+
 
 
     <!-- http://example.org/bmw#XSeriesCar -->
@@ -440,19 +434,13 @@
                     <rdf:Description rdf:about="http://example.org/bmw#BMWModel"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://example.org/bmw#hasSeries"/>
-                        <owl:someValuesFrom rdf:resource="http://example.org/bmw#xSeries"/>
+                        <owl:hasValue rdf:resource="http://example.org/bmw#xSeries"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
     </owl:Class>
-    
 
-
-    <!-- http://example.org/bmw#iSeries -->
-
-    <owl:Class rdf:about="http://example.org/bmw#iSeries"/>
-    
 
 
     <!-- http://example.org/bmw#iSeriesCar -->
@@ -464,34 +452,16 @@
                     <rdf:Description rdf:about="http://example.org/bmw#BMWModel"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://example.org/bmw#hasSeries"/>
-                        <owl:someValuesFrom rdf:resource="http://example.org/bmw#iSeries"/>
+                        <owl:hasValue rdf:resource="http://example.org/bmw#iSeries"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
     </owl:Class>
-    
 
 
-    <!-- http://example.org/bmw#threeSeries -->
 
-    <owl:Class rdf:about="http://example.org/bmw#threeSeries"/>
-    
-
-
-    <!-- http://example.org/bmw#xDrive -->
-
-    <owl:Class rdf:about="http://example.org/bmw#xDrive"/>
-    
-
-
-    <!-- http://example.org/bmw#xSeries -->
-
-    <owl:Class rdf:about="http://example.org/bmw#xSeries"/>
-    
-
-
-    <!-- 
+    <!--
     ///////////////////////////////////////////////////////////////////////////////////////
     //
     // Individuals
@@ -499,7 +469,7 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    
+
 
 
     <!-- http://example.org/bmw#AWD -->
@@ -507,7 +477,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#AWD">
         <rdf:type rdf:resource="http://example.org/bmw#Drivetrain"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMW118i -->
@@ -521,7 +491,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#oneSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMW1SeriesM135i -->
@@ -535,7 +505,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#oneSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMW230iCoupe -->
@@ -549,7 +519,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#twoSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMW2SeriesGranCoupe -->
@@ -563,7 +533,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#twoSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMW320iF30 -->
@@ -577,7 +547,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#threeSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMW330e -->
@@ -592,7 +562,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#PlugInHybrid"/>
         <hasSeries rdf:resource="http://example.org/bmw#threeSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMW420iGranCoupe -->
@@ -607,7 +577,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#fourSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMW530eG30 -->
@@ -622,7 +592,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#PlugInHybrid"/>
         <hasSeries rdf:resource="http://example.org/bmw#fiveSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMW540i -->
@@ -636,7 +606,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#fiveSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMW5SeriesM550i -->
@@ -650,7 +620,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#fiveSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMW6SeriesGT630i -->
@@ -664,7 +634,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#sixSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMW6SeriesGranTurismo -->
@@ -679,7 +649,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#sixSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMW750Li -->
@@ -694,7 +664,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#sevenSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMW7Series760i -->
@@ -709,7 +679,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#sevenSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMW8SeriesGranCoupe -->
@@ -724,7 +694,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#eightSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWM2Competition -->
@@ -738,7 +708,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#twoSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWM440iGranCoupe -->
@@ -754,7 +724,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#fourSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWM4Competition -->
@@ -769,7 +739,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#fourSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWM5F90 -->
@@ -786,7 +756,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#fiveSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWM850ixDrive -->
@@ -801,7 +771,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#eightSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWM8Competition -->
@@ -816,7 +786,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#eightSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWX1xDrive20i -->
@@ -831,7 +801,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#xSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWX2M35i -->
@@ -846,7 +816,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#xSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWX2xDrive20i -->
@@ -861,7 +831,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#xSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWX3M40i -->
@@ -876,7 +846,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#xSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWX3xDrive30i -->
@@ -892,7 +862,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#xSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWX4M40i -->
@@ -907,7 +877,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#xSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWX4xDrive30i -->
@@ -922,7 +892,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#xSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWX5MCompetition -->
@@ -937,7 +907,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#xSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWX6M50i -->
@@ -952,7 +922,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#xSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWX6xDrive30d -->
@@ -966,7 +936,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Diesel"/>
         <hasSeries rdf:resource="http://example.org/bmw#xSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWX7xDrive40i -->
@@ -981,7 +951,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#xSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWXMMHybrid -->
@@ -996,7 +966,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#PlugInHybrid"/>
         <hasSeries rdf:resource="http://example.org/bmw#xSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWZ4M40i -->
@@ -1010,7 +980,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#zSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWZ4sDrive20i -->
@@ -1024,7 +994,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#zSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWi3_2024 -->
@@ -1038,7 +1008,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Electric"/>
         <hasSeries rdf:resource="http://example.org/bmw#iSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWi5eDrive40 -->
@@ -1053,7 +1023,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Electric"/>
         <hasSeries rdf:resource="http://example.org/bmw#iSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWi7M70 -->
@@ -1068,7 +1038,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Electric"/>
         <hasSeries rdf:resource="http://example.org/bmw#iSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWi7xDrive60 -->
@@ -1083,7 +1053,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Electric"/>
         <hasSeries rdf:resource="http://example.org/bmw#iSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#BMWiX3 -->
@@ -1098,7 +1068,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Electric"/>
         <hasSeries rdf:resource="http://example.org/bmw#iSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#Convertible -->
@@ -1106,7 +1076,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#Convertible">
         <rdf:type rdf:resource="http://example.org/bmw#BodyType"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#Coupe -->
@@ -1114,7 +1084,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#Coupe">
         <rdf:type rdf:resource="http://example.org/bmw#BodyType"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#Diesel -->
@@ -1122,7 +1092,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#Diesel">
         <rdf:type rdf:resource="http://example.org/bmw#Powertrain"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#DrivingAssistance -->
@@ -1130,7 +1100,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#DrivingAssistance">
         <rdf:type rdf:resource="http://example.org/bmw#Feature"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#DrivingAssistancePro -->
@@ -1138,7 +1108,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#DrivingAssistancePro">
         <rdf:type rdf:resource="http://example.org/bmw#Feature"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#Electric -->
@@ -1146,7 +1116,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#Electric">
         <rdf:type rdf:resource="http://example.org/bmw#Powertrain"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#FWD -->
@@ -1154,7 +1124,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#FWD">
         <rdf:type rdf:resource="http://example.org/bmw#Drivetrain"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#Gasoline -->
@@ -1162,7 +1132,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#Gasoline">
         <rdf:type rdf:resource="http://example.org/bmw#Powertrain"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#GranCoupe -->
@@ -1170,7 +1140,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#GranCoupe">
         <rdf:type rdf:resource="http://example.org/bmw#BodyType"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#Hatchback -->
@@ -1178,7 +1148,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#Hatchback">
         <rdf:type rdf:resource="http://example.org/bmw#BodyType"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#Hybrid -->
@@ -1186,7 +1156,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#Hybrid">
         <rdf:type rdf:resource="http://example.org/bmw#Powertrain"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#M3G80 -->
@@ -1201,7 +1171,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Gasoline"/>
         <hasSeries rdf:resource="http://example.org/bmw#threeSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#MPerformance -->
@@ -1209,7 +1179,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#MPerformance">
         <rdf:type rdf:resource="http://example.org/bmw#Performance"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#MSeries -->
@@ -1217,7 +1187,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#MSeries">
         <rdf:type rdf:resource="http://example.org/bmw#Performance"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#MSportSuspension -->
@@ -1225,7 +1195,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#MSportSuspension">
         <rdf:type rdf:resource="http://example.org/bmw#Feature"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#PanoramicRoof -->
@@ -1233,7 +1203,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#PanoramicRoof">
         <rdf:type rdf:resource="http://example.org/bmw#Feature"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#PlugInHybrid -->
@@ -1241,7 +1211,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#PlugInHybrid">
         <rdf:type rdf:resource="http://example.org/bmw#Powertrain"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#RWD -->
@@ -1249,7 +1219,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#RWD">
         <rdf:type rdf:resource="http://example.org/bmw#Drivetrain"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#SUV -->
@@ -1257,7 +1227,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#SUV">
         <rdf:type rdf:resource="http://example.org/bmw#BodyType"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#Sedan -->
@@ -1265,7 +1235,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#Sedan">
         <rdf:type rdf:resource="http://example.org/bmw#BodyType"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#Standard -->
@@ -1273,7 +1243,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#Standard">
         <rdf:type rdf:resource="http://example.org/bmw#Performance"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#X5xDrive45e -->
@@ -1289,7 +1259,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#PlugInHybrid"/>
         <hasSeries rdf:resource="http://example.org/bmw#xSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#eightSeries -->
@@ -1297,7 +1267,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#eightSeries">
         <rdf:type rdf:resource="http://example.org/bmw#Series"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#fiveSeries -->
@@ -1305,7 +1275,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#fiveSeries">
         <rdf:type rdf:resource="http://example.org/bmw#Series"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#fourSeries -->
@@ -1313,7 +1283,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#fourSeries">
         <rdf:type rdf:resource="http://example.org/bmw#Series"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#i4M50 -->
@@ -1329,7 +1299,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Electric"/>
         <hasSeries rdf:resource="http://example.org/bmw#iSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#iDrive -->
@@ -1337,7 +1307,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#iDrive">
         <rdf:type rdf:resource="http://example.org/bmw#Feature"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#iSeries -->
@@ -1345,7 +1315,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#iSeries">
         <rdf:type rdf:resource="http://example.org/bmw#Series"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#iXxDrive50 -->
@@ -1361,7 +1331,7 @@
         <hasPowertrain rdf:resource="http://example.org/bmw#Electric"/>
         <hasSeries rdf:resource="http://example.org/bmw#iSeries"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#oneSeries -->
@@ -1369,7 +1339,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#oneSeries">
         <rdf:type rdf:resource="http://example.org/bmw#Series"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#sevenSeries -->
@@ -1377,7 +1347,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#sevenSeries">
         <rdf:type rdf:resource="http://example.org/bmw#Series"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#sixSeries -->
@@ -1385,7 +1355,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#sixSeries">
         <rdf:type rdf:resource="http://example.org/bmw#Series"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#threeSeries -->
@@ -1393,7 +1363,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#threeSeries">
         <rdf:type rdf:resource="http://example.org/bmw#Series"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#twoSeries -->
@@ -1401,7 +1371,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#twoSeries">
         <rdf:type rdf:resource="http://example.org/bmw#Series"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#xDrive -->
@@ -1409,7 +1379,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#xDrive">
         <rdf:type rdf:resource="http://example.org/bmw#Feature"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#xSeries -->
@@ -1417,7 +1387,7 @@
     <owl:NamedIndividual rdf:about="http://example.org/bmw#xSeries">
         <rdf:type rdf:resource="http://example.org/bmw#Series"/>
     </owl:NamedIndividual>
-    
+
 
 
     <!-- http://example.org/bmw#zSeries -->

@@ -70,25 +70,25 @@
 
 :ElectricCar owl:equivalentClass [
     rdf:type owl:Class ;
-    owl:intersectionOf ( :BMWModel [ owl:onProperty :hasPowertrain ; owl:someValuesFrom :Electric ] )
+    owl:intersectionOf ( :BMWModel [ owl:onProperty :hasPowertrain ; owl:hasValue :Electric ] )
 ] .
 
 :HybridCar owl:equivalentClass [
     rdf:type owl:Class ;
-    owl:intersectionOf ( :BMWModel [ owl:onProperty :hasPowertrain ; owl:someValuesFrom :PlugInHybrid ] )
+    owl:intersectionOf ( :BMWModel [ owl:onProperty :hasPowertrain ; owl:hasValue :PlugInHybrid ] )
 ] .
 
 :PetrolCar owl:equivalentClass [
     rdf:type owl:Class ;
-    owl:intersectionOf ( :BMWModel [ owl:onProperty :hasPowertrain ; owl:someValuesFrom :Gasoline ] )
+    owl:intersectionOf ( :BMWModel [ owl:onProperty :hasPowertrain ; owl:hasValue :Gasoline ] )
 ] .
 
 :HighPerformanceCar owl:equivalentClass [
     owl:intersectionOf (
         :BMWModel
         [ owl:unionOf (
-            [ owl:onProperty :hasPerformance ; owl:someValuesFrom :MSeries ]
-            [ owl:onProperty :hasPerformance ; owl:someValuesFrom :MPerformance ]
+            [ owl:onProperty :hasPerformance ; owl:hasValue :MSeries ]
+            [ owl:onProperty :hasPerformance ; owl:hasValue :MPerformance ]
         ) ]
     )
 ] .
@@ -96,43 +96,43 @@
 :StandardCar owl:equivalentClass [
     owl:intersectionOf (
         :BMWModel
-        [ owl:onProperty :hasPerformance ; owl:someValuesFrom :Standard ]
+        [ owl:onProperty :hasPerformance ; owl:hasValue :Standard ]
     )
 ] .
 
 :AdvancedADASCar owl:equivalentClass [
     owl:intersectionOf (
         :BMWModel
-        [ owl:onProperty :hasFeature ; owl:someValuesFrom :DrivingAssistancePro ]
+        [ owl:onProperty :hasFeature ; owl:hasValue :DrivingAssistancePro ]
     )
 ] .
 
 :OffroadCapableSUV owl:equivalentClass [
     owl:intersectionOf (
         :BMWModel
-        [ owl:onProperty :hasBodyType ; owl:someValuesFrom :SUV ]
-        [ owl:onProperty :hasFeature ; owl:someValuesFrom :xDrive ]
+        [ owl:onProperty :hasBodyType ; owl:hasValue :SUV ]
+        [ owl:onProperty :hasFeature ; owl:hasValue :xDrive ]
     )
 ] .
 
 :iSeriesCar owl:equivalentClass [
     owl:intersectionOf (
         :BMWModel
-        [ owl:onProperty :hasSeries ; owl:someValuesFrom :iSeries ]
+        [ owl:onProperty :hasSeries ; owl:hasValue :iSeries ]
     )
 ] .
 
 :ThreeSeriesCar owl:equivalentClass [
     owl:intersectionOf (
         :BMWModel
-        [ owl:onProperty :hasSeries ; owl:someValuesFrom :threeSeries ]
+        [ owl:onProperty :hasSeries ; owl:hasValue :threeSeries ]
     )
 ] .
 
 :XSeriesCar owl:equivalentClass [
     owl:intersectionOf (
         :BMWModel
-        [ owl:onProperty :hasSeries ; owl:someValuesFrom :xSeries ]
+        [ owl:onProperty :hasSeries ; owl:hasValue :xSeries ]
     )
 ] .
 
