@@ -1,0 +1,124 @@
+==============================
+BMW KNOWLEDGE GRAPH SCHEMA
+==============================
+
+This schema describes all node labels, relationships, properties, and important categories
+used inside the Neo4j database. Use this structure when generating Cypher queries.
+
+====================================================
+NODE LABELS
+====================================================
+
+(:BMWModel)
+(:Series)
+(:BodyType)
+(:Powertrain)
+(:Drivetrain)
+(:Feature)
+(:Performance)
+
+====================================================
+INFERRED LABELS
+====================================================
+
+POWERTRAIN:
+(:ElectricCar)
+(:HybridCar)
+(:PetrolCar)
+(:DieselCar)
+
+PERFORMANCE:
+(:HighPerformanceCar)
+(:StandardCar)
+
+FEATURE:
+(:AdvancedADASCar)
+
+BODY TYPE + FEATURE:
+(:OffroadCapableSUV)
+
+SERIES:
+(:iSeriesCar)
+(:ThreeSeriesCar)
+(:XSeriesCar)
+
+BODY TYPE:
+(:CoupeCar)
+(:ConvertibleCar)
+(:HatchbackCar)
+
+DRIVETRAIN:
+(:FWDCar)
+(:RWDCar)
+(:AWDCar)
+
+====================================================
+NODE PROPERTIES
+====================================================
+
+BMWModel { name: STRING }
+Series { name: STRING }
+BodyType { name: STRING }
+Powertrain { name: STRING }
+Drivetrain { name: STRING }
+Feature { name: STRING }
+Performance { name: STRING }
+
+====================================================
+RELATIONSHIPS
+====================================================
+
+(:BMWModel)-[:HAS_SERIES]->(:Series)  // Maps a model to the official BMW Series line.
+(:BMWModel)-[:HAS_BODY_TYPE]->(:BodyType) // Maps a model to its physical body style.
+(:BMWModel)-[:HAS_POWERTRAIN]->(:Powertrain) // Maps a model to its power source.
+(:BMWModel)-[:HAS_DRIVETRAIN]->(:Drivetrain) // Maps a model to its direction of power delivery.
+(:BMWModel)-[:HAS_FEATURE]->(:Feature) // Maps a model to its features.
+(:BMWModel)-[:HAS_PERFORMANCE]->(:Performance) // Maps a model to its performance tier.
+
+====================================================
+COMMON QUERY PATTERNS
+====================================================
+
+-- Find models by body type
+MATCH (m:BMWModel)-[:HAS_BODY_TYPE]->(b:BodyType {name:$body})
+RETURN m
+
+-- Find electric models
+MATCH (m:BMWModel:ElectricCar)
+RETURN m
+
+-- Find M Series performance cars
+MATCH (m:BMWModel)-[:HAS_PERFORMANCE]->(:Performance {name:"M Series"})
+RETURN m
+
+-- Find SUVs with xDrive capability
+MATCH (m:BMWModel:OffroadCapableSUV)
+RETURN m
+
+-- Find all models in a given series
+MATCH (m:BMWModel)-[:HAS_SERIES]->(s:Series {name:$series})
+RETURN m
+
+-- Full profile for a model
+MATCH (m:BMWModel {name:$model})
+OPTIONAL MATCH (m)-[:HAS_SERIES]->(s)
+OPTIONAL MATCH (m)-[:HAS_BODY_TYPE]->(b)
+OPTIONAL MATCH (m)-[:HAS_POWERTRAIN]->(p)
+OPTIONAL MATCH (m)-[:HAS_DRIVETRAIN]->(d)
+OPTIONAL MATCH (m)-[:HAS_PERFORMANCE]->(perf)
+OPTIONAL MATCH (m)-[:HAS_FEATURE]->(f)
+RETURN m, s, b, p, d, perf, collect(f) AS features
+
+====================================================
+NATURAL LANGUAGE NOTES
+====================================================
+
+"electric car" → (:ElectricCar)
+"SUV" → BodyType {name:"SUV"}
+"M car" / "M Series" → Performance {name:"M Series"}
+"xDrive" → Feature {name:"xDrive"}
+"offroad capable" → (:OffroadCapableSUV)
+
+====================================================
+END OF SCHEMA
+====================================================

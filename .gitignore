@@ -1,0 +1,23 @@
+# Configuration with secrets
+config.toml
+TP2/config.toml
+*.toml
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+.venv/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
