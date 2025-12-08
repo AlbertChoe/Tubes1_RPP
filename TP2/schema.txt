@@ -120,5 +120,53 @@ NATURAL LANGUAGE NOTES
 "offroad capable" → (:OffroadCapableSUV)
 
 ====================================================
+KNOWN ENTITIES (BMWModel)
+====================================================
+- BMW i4 M50
+- BMW M3 G80
+- BMW X5 xDrive45e
+- BMW 320i F30
+- BMW iX xDrive50
+- BMW 530e G30
+- BMW M5 F90
+- BMW X3 xDrive30i
+- BMW X1 xDrive20i
+- BMW 420i Gran Coupe
+- BMW X2 xDrive20i
+- BMW X4 xDrive30i
+- BMW X6 M50i
+- BMW 8 Series Gran Coupe
+- BMW M4 Competition
+- BMW Z4 M40i
+- BMW i3 (2024)
+- BMW i7 xDrive60
+- BMW XM M Hybrid
+- BMW 7 Series 760i
+- BMW 6 Series Gran Turismo
+- BMW 2 Series Gran Coupe
+- BMW M2 Competition
+- BMW i5 eDrive40
+- BMW 1 Series M135i
+- BMW 6 Series GT 630i
+- BMW M8 Competition
+- BMW X7 xDrive40i
+- BMW Z4 sDrive20i
+- BMW X3 M40i
+- BMW X4 M40i
+- BMW iX3
+- BMW 5 Series M550i
+- BMW X6 xDrive30d
+- BMW 118i
+- BMW 230i Coupe
+- BMW 330e
+- BMW 540i
+- BMW 750Li
+- BMW X5 M Competition
+- BMW M440i Gran Coupe
+- BMW X2 M35i
+- BMW i7 M70
+- BMW M850i xDrive
+
+====================================================
 END OF SCHEMA
 ====================================================

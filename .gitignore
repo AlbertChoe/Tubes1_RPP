@@ -1,8 +1,3 @@
-# Configuration with secrets
-config.toml
-TP2/config.toml
-*.toml
-
 # Python
 __pycache__/
 *.pyc

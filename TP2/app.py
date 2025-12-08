@@ -1,5 +1,15 @@
 import streamlit as st
+import logging
 from response_generator import ResponseGenerator
+
+# Configure Logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
+
+# Suppress Neo4j driver notifications
+logging.getLogger("neo4j.notifications").setLevel(logging.WARNING)
 
 st.set_page_config(page_title="BMW Knowledge Graph Assistant", layout="wide")
 

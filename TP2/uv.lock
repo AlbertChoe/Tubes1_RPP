@@ -905,7 +905,6 @@ dependencies = [
     { name = "neo4j" },
     { name = "openai" },
     { name = "streamlit" },
-    { name = "toml" },
 ]
 
 [package.metadata]
@@ -913,7 +912,6 @@ requires-dist = [
     { name = "neo4j", specifier = ">=6.0.3" },
     { name = "openai", specifier = ">=2.9.0" },
     { name = "streamlit", specifier = ">=1.52.1" },
-    { name = "toml", specifier = ">=0.10.2" },
 ]
 
 [[package]]

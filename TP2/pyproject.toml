@@ -1,0 +1,11 @@
+[project]
+name = "tp2"
+version = "0.1.0"
+description = "BMW Knowledge Graph Assistant"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "neo4j>=6.0.3",
+    "openai>=2.9.0",
+    "streamlit>=1.52.1",
+]

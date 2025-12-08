@@ -1,25 +1,32 @@
 from neo4j import GraphDatabase
-import toml
+import os
+import logging
 
+logger = logging.getLogger(__name__)
 
 class Neo4jDatabase:
-    def __init__(self, config_path="config.toml"):
-        self.config = toml.load(config_path)
+    def __init__(self):
         self._connect()
 
     def _connect(self):
         try:
+            uri = os.environ.get("NEO4J_URI", "bolt://localhost:7687")
+            user = os.environ.get("NEO4J_USER", "neo4j")
+            password = os.environ.get("NEO4J_PASSWORD", "password")
+            
             self.driver = GraphDatabase.driver(
-                self.config["neo4j"]["uri"],
-                auth=(self.config["neo4j"]["user"], self.config["neo4j"]["password"]),
+                uri,
+                auth=(user, password),
             )
+            logger.info("Successfully connected to Neo4j.")
         except Exception as e:
-            print(f"Failed to connect to Neo4j: {e}")
+            logger.error(f"Failed to connect to Neo4j: {e}")
             self.driver = None
 
     def close(self):
         if self.driver:
             self.driver.close()
+            logger.info("Neo4j connection closed.")
 
     def query(self, query, parameters=None):
         if not self.driver:
@@ -30,7 +37,7 @@ class Neo4jDatabase:
                 result = session.run(query, parameters)
                 return [record.data() for record in result]
         except Exception as e:
-            print(f"Query failed ({e}), attempting to reconnect...")
+            logger.warning(f"Query failed ({e}), attempting to reconnect...")
             self.close()
             self._connect()
             try:
@@ -38,5 +45,5 @@ class Neo4jDatabase:
                     result = session.run(query, parameters)
                     return [record.data() for record in result]
             except Exception as e2:
-                print(f"Retry failed: {e2}")
+                logger.error(f"Retry failed: {e2}")
                 raise e2

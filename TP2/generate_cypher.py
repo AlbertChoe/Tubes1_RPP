@@ -3,6 +3,15 @@ import re
 import os
 
 
+import logging
+
+# Configure Logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
+logger = logging.getLogger(__name__)
+
 def clean_string(s):
     return s.strip().replace("'", "\\'")
 
@@ -14,7 +23,7 @@ def to_snake_case(name):
 
 def generate_cypher(data_file, output_file):
     if not os.path.exists(data_file):
-        print(f"Error: {data_file} not found.")
+        logger.error(f"{data_file} not found.")
         return
 
     with open(data_file, "r") as f:
@@ -159,8 +168,8 @@ def generate_cypher(data_file, output_file):
     with open(output_file, "w") as f:
         f.write("\n".join(cypher_queries))
 
-    print(f"Generated {len(cypher_queries)} Cypher queries in {output_file}")
+    logger.info(f"Generated {len(cypher_queries)} Cypher queries in {output_file}")
 
 
 if __name__ == "__main__":
-    generate_cypher("../TP1/data.json", "graph_data.cypher")
+    generate_cypher("data.json", "graph_data.cypher")
