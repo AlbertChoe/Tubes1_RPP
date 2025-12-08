@@ -194,4 +194,4 @@ def generate_cypher(data_file: str, output_file: str) -> None:
 
 
 if __name__ == "__main__":
-    generate_cypher("data.json", "graph_data.cypher")
+    generate_cypher("data/data.json", "data/graph_data.cypher")

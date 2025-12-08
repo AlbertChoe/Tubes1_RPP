@@ -15,7 +15,7 @@ DEFAULT_MODEL = "gpt-3.5-turbo"
 DEFAULT_BASE_URL = "https://api.openai.com/v1"
 
 # Retry settings
-MAX_QUERY_RETRIES = 3
+MAX_QUERY_RETRIES = 4
 
 # LLM temperature settings
 CYPHER_GENERATION_TEMPERATURE = 0.5
@@ -42,7 +42,7 @@ class ResponseGenerator:
 
     def _load_schema(self) -> str:
         try:
-            with open("schema.txt", "r") as f:
+            with open("data/schema.txt", "r") as f:
                 return f.read()
         except FileNotFoundError:
             logger.error("Schema file not found.")
@@ -222,7 +222,7 @@ class ResponseGenerator:
             return response.choices[0].message.content.strip()
         except Exception as e:
             logger.error(f"Error generating response: {e}")
-            return f"Error generating response: {e}"
+            return "Sorry, I cannot answer your question because I do not have the knowledge to answer it."
 
     def generate_response(
         self, question: str, chat_history: list[dict] | None = None
@@ -231,18 +231,17 @@ class ResponseGenerator:
         logger.info(f"Generated Cypher: {cypher_query}")
 
         if not cypher_query:
-            return "Sorry, I couldn't generate a query for that request."
+            return "Sorry, I cannot answer your question because I do not have the knowledge to answer it."
 
         results, error = self._execute_query_with_retry(question, cypher_query)
 
         if error:
-            return error
+            return "Sorry, I cannot answer your question because I do not have the knowledge to answer it."
 
         if not results:
             if results is None:
                 logger.error("Unexpected None results from db query.")
-                return "An unexpected error occurred during query execution."
-            return "I couldn't find any information matching your request in the database."
+            return "Sorry, I cannot answer your question because I do not have the knowledge to answer it."
 
         if not self.client:
             return str(results)

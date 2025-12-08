@@ -1,7 +1,9 @@
+import sys
+import os
 import unittest
 
-from database import Neo4jDatabase
-from response_generator import ResponseGenerator
+from src.database import Neo4jDatabase
+from src.response_generator import ResponseGenerator
 
 
 class TestRAGSystem(unittest.TestCase):

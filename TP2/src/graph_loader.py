@@ -61,7 +61,7 @@ def main() -> None:
     loader = GraphLoader(uri, user, password)
     try:
         loader.clear_database()
-        loader.load_cypher("graph_data.cypher")
+        loader.load_cypher("data/graph_data.cypher")
     finally:
         loader.close()
 
