@@ -8,10 +8,12 @@ st.markdown("""
 Ask questions about BMW models, features, and specifications.
 """)
 
+
 # Initialize ResponseGenerator (Cached to avoid reloading)
 @st.cache_resource
 def get_rag_system():
     return ResponseGenerator()
+
 
 rag = get_rag_system()
 
@@ -36,7 +38,9 @@ if prompt := st.chat_input("Ask about BMW cars (e.g., 'Show me electric SUVs')..
                 response = rag.generate_response(prompt)
                 st.markdown(response)
                 # Add assistant message to history
-                st.session_state.messages.append({"role": "assistant", "content": response})
+                st.session_state.messages.append(
+                    {"role": "assistant", "content": response}
+                )
                 st.rerun()
             except Exception as e:
                 st.error(f"An error occurred: {e}")

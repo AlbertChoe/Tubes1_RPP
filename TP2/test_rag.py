@@ -2,6 +2,7 @@ import unittest
 from database import Neo4jDatabase
 from response_generator import ResponseGenerator
 
+
 class TestRAGSystem(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -16,13 +17,13 @@ class TestRAGSystem(unittest.TestCase):
     def test_graph_counts(self):
         # Check total models
         result = self.db.query("MATCH (n:BMWModel) RETURN count(n) as count")
-        self.assertGreater(result[0]['count'], 0, "Should have BMW models")
+        self.assertGreater(result[0]["count"], 0, "Should have BMW models")
         print(f"Total BMW Models: {result[0]['count']}")
 
     def test_electric_cars(self):
         # Check if ElectricCar label is applied correctly
         result = self.db.query("MATCH (n:ElectricCar) RETURN n.name")
-        names = [r['n.name'] for r in result]
+        names = [r["n.name"] for r in result]
         self.assertIn("BMW i4 M50", names)
         self.assertIn("BMW iX xDrive50", names)
         print(f"Electric Cars found: {len(names)}")
@@ -43,5 +44,6 @@ class TestRAGSystem(unittest.TestCase):
         self.assertIn("BMW i4 M50", response)
         print("Response test passed.")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

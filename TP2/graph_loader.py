@@ -1,6 +1,8 @@
 import os
-from neo4j import GraphDatabase
+from typing import LiteralString, cast
+
 import toml
+from neo4j import GraphDatabase
 
 # Load configuration
 try:
@@ -13,6 +15,7 @@ except Exception as e:
     NEO4J_URI = "bolt://localhost:7687"
     NEO4J_USER = "neo4j"
     NEO4J_PASSWORD = "password"
+
 
 class GraphLoader:
     def __init__(self, uri, user, password):
@@ -31,8 +34,8 @@ class GraphLoader:
             print(f"Error: File {file_path} not found.")
             return
 
-        with open(file_path, 'r') as f:
-            queries = f.read().split(';')
+        with open(file_path, "r") as f:
+            queries = f.read().split(";")
 
         with self.driver.session() as session:
             count = 0
@@ -40,11 +43,12 @@ class GraphLoader:
                 query = query.strip()
                 if query:
                     try:
-                        session.run(query)
+                        session.run(cast(LiteralString, query))
                         count += 1
                     except Exception as e:
                         print(f"Error executing query: {query[:50]}... \n{e}")
             print(f"Executed {count} queries from {file_path}")
+
 
 def main():
     loader = GraphLoader(NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD)
@@ -53,6 +57,7 @@ def main():
         loader.load_cypher("graph_data.cypher")
     finally:
         loader.close()
+
 
 if __name__ == "__main__":
     main()

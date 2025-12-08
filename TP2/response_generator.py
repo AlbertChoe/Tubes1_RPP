@@ -1,7 +1,10 @@
-from database import Neo4jDatabase
-from openai import OpenAI
+import textwrap
+
 import toml
-import os
+from openai import OpenAI
+
+from database import Neo4jDatabase
+
 
 class ResponseGenerator:
     def __init__(self):
@@ -11,13 +14,14 @@ class ResponseGenerator:
             config = toml.load("config.toml")
             self.api_key = config["llm"]["api_key"]
             self.model = config["llm"]["model"]
+            self.base_url = config["llm"].get("base_url", "https://api.openai.com/v1")
         except Exception as e:
             print(f"Error loading config: {e}")
             self.api_key = None
             self.model = "gpt-3.5-turbo"
 
         if self.api_key:
-            self.client = OpenAI(api_key=self.api_key)
+            self.client = OpenAI(api_key=self.api_key, base_url=self.base_url)
         else:
             print("Warning: No API key found in config.toml")
             self.client = None
@@ -29,40 +33,53 @@ class ResponseGenerator:
         try:
             with open("schema.txt", "r") as f:
                 return f.read()
-        except:
+        except Exception:
             return "Schema file not found."
 
     def generate_cypher(self, question):
         if not self.client:
-            return "MATCH (n) RETURN n LIMIT 5" # Fallback
+            return "MATCH (n) RETURN n LIMIT 5"  # Fallback
 
-        system_prompt = f"""
-You are an expert Neo4j Cypher query generator.
-Use the following Graph Schema to answer the user's question.
-Do NOT hallucinate relationships or labels that are not in the schema.
+        system_prompt = textwrap.dedent(f"""
+            You are an expert Neo4j Cypher query generator.
+            Your task is to convert the user's natural language question into a valid Cypher query based on the schema below.
 
-SCHEMA:
-{self.schema}
+            SCHEMA:
+            {self.schema}
 
-INSTRUCTIONS:
-1. Generate ONLY the Cypher query. No markdown, no explanation.
-2. Use case-insensitive matching for string properties (e.g., toLower(n.name) CONTAINS ...). Properties name can be inferred from the question to match the properties name in the schema.
-3. The node label 'BMWModel' is the main entity.
-4. Use the specific labels (e.g., :ElectricCar, :SUV) if they are relevant to the question.
-5. Infer the relationships between nodes based on the schema. For example, if the question is about the fastest car, use the :HighPerformanceCar label.
-"""
+            GUIDELINES:
+            1. **Output:** Generate ONLY the Cypher query string. No markdown, no explanations, no code blocks.
+            2. **Root Node:** Always start matching with the node `(m:BMWModel)`.
+            3. **Value Formatting:** The database uses Title Case for specific values.
+               - If user asks for "suv", match `{{name: 'SUV'}}`.
+               - If user asks for "3 series", match `{{name: '3 Series'}}`.
+               - If user asks for "electric", match `{{name: 'Electric'}}`.
+            4. **Structural Matching (Priority):**
+               - Prefer matching attributes via relationships defined in the schema.
+               - Example: `MATCH (m)-[:HAS_BODY_TYPE]->(:BodyType {{name: 'SUV'}})` is safer than guessing a label like `:SUVCar`.
+            5. **Label Shortcuts:** You MAY use specific labels (e.g., `:ElectricCar`, `:MSeries`) in combination with the main label IF they simplify the query and exist in the schema.
+               - Example: `MATCH (m:BMWModel:ElectricCar)` is valid.
+            6. **Return Clause:** You MUST end the query with a `RETURN` clause showing the relevant model names or properties.
+               - Default: `RETURN m.name`
+
+            EXAMPLE INPUT:
+            "Show me all electric SUVs"
+
+            EXAMPLE OUTPUT:
+            MATCH (m:BMWModel:ElectricCar)-[:HAS_BODY_TYPE]->(:BodyType {{name: 'SUV'}}) RETURN m.name
+        """)
 
         try:
+            print(self.client.base_url)
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[
                     {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": question}
+                    {"role": "user", "content": question},
                 ],
-                temperature=1
+                temperature=0.5,
             )
             cypher = response.choices[0].message.content.strip()
-            # Clean up markdown if present
             cypher = cypher.replace("```cypher", "").replace("```", "").strip()
             return cypher
         except Exception as e:
@@ -84,34 +101,41 @@ INSTRUCTIONS:
             return f"Error executing query: {e}\nQuery: {cypher_query}"
 
         if not results:
-            return "I couldn't find any information matching your request in the database."
+            return (
+                "I couldn't find any information matching your request in the database."
+            )
 
         # Generate Natural Language Response
         if not self.client:
             return str(results)
 
-        system_prompt = """
-You are a knowledgeable and professional BMW assistant.
-Answer the user's question directly using the provided context.
-Maintain a formal and polite tone.
-Do not explain that you corrected the user's spelling.
-** IMPORTANT: Do not mention "Based on the provided database" or similar phrases. **
-Provide the answer naturally, as if you possess this knowledge inherently.
-If the results are a list of cars, present them in a clean, structured format.
-"""
+        system_prompt = textwrap.dedent("""
+            You are a knowledgeable and professional BMW assistant.
+            Answer the user's question directly using the provided context.
+            Maintain a formal and polite tone.
+            Do not explain that you corrected the user's spelling.
+            ** IMPORTANT: Do not mention "Based on the provided database" or similar phrases. **
+            Provide the answer naturally, as if you possess this knowledge inherently.
+            If the results are a list of cars, present them in a clean, structured format.
+        """)
 
-        user_content = f"""
-Question: {question}
-Database Results: {results}
-"""
+        user_content = textwrap.dedent(f"""
+            Question:
+            {question}
+
+            ----
+
+            Database Results:
+            {results}
+        """)
 
         try:
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[
                     {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_content}
-                ]
+                    {"role": "user", "content": user_content},
+                ],
             )
             return response.choices[0].message.content.strip()
         except Exception as e:

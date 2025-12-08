@@ -1,5 +1,5 @@
 from response_generator import ResponseGenerator
-import sys
+
 
 def main():
     rag = ResponseGenerator()
@@ -9,7 +9,7 @@ def main():
     while True:
         try:
             user_input = input("\nAsk a question: ")
-            if user_input.lower() in ['exit', 'quit']:
+            if user_input.lower() in ["exit", "quit"]:
                 break
 
             response = rag.generate_response(user_input)
@@ -23,6 +23,7 @@ def main():
 
     rag.close()
     print("\nGoodbye!")
+
 
 if __name__ == "__main__":
     main()

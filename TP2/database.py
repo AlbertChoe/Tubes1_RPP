@@ -1,6 +1,7 @@
 from neo4j import GraphDatabase
 import toml
 
+
 class Neo4jDatabase:
     def __init__(self, config_path="config.toml"):
         self.config = toml.load(config_path)
@@ -10,7 +11,7 @@ class Neo4jDatabase:
         try:
             self.driver = GraphDatabase.driver(
                 self.config["neo4j"]["uri"],
-                auth=(self.config["neo4j"]["user"], self.config["neo4j"]["password"])
+                auth=(self.config["neo4j"]["user"], self.config["neo4j"]["password"]),
             )
         except Exception as e:
             print(f"Failed to connect to Neo4j: {e}")
