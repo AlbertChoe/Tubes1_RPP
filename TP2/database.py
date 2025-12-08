@@ -4,6 +4,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class Neo4jDatabase:
     def __init__(self):
         self._connect()
@@ -13,7 +14,7 @@ class Neo4jDatabase:
             uri = os.environ.get("NEO4J_URI", "bolt://localhost:7687")
             user = os.environ.get("NEO4J_USER", "neo4j")
             password = os.environ.get("NEO4J_PASSWORD", "password")
-            
+
             self.driver = GraphDatabase.driver(
                 uri,
                 auth=(user, password),

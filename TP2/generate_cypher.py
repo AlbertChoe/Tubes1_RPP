@@ -1,9 +1,7 @@
 import json
-import re
-import os
-
-
 import logging
+import os
+import re
 
 # Configure Logging
 logging.basicConfig(
@@ -11,6 +9,7 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 logger = logging.getLogger(__name__)
+
 
 def clean_string(s):
     return s.strip().replace("'", "\\'")

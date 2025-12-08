@@ -23,7 +23,6 @@ class ResponseGenerator:
             logger.warning("No API key found in environment variables")
             self.client = None
 
-        # Load Schema for Context
         self.schema = self._load_schema()
 
     def _load_schema(self):
@@ -34,13 +33,25 @@ class ResponseGenerator:
             logger.error("Schema file not found.")
             return "Schema file not found."
 
-    def generate_cypher(self, question):
+    def generate_cypher(self, question, chat_history=None):
         if not self.client:
-            return "MATCH (n) RETURN n LIMIT 5"  # Fallback
+            return "MATCH (n) RETURN n LIMIT 5"
+
+        if chat_history is None:
+            chat_history = []
+
+        history_context = ""
+        if chat_history:
+            history_str = "\n".join(
+                [f"{msg['role'].upper()}: {msg['content']}" for msg in chat_history]
+            )
+            history_context = f"\nCHAT HISTORY:\n{history_str}\n"
 
         system_prompt = textwrap.dedent(f"""
             You are an expert Neo4j Cypher query generator.
             Your task is to convert the user's natural language question into a valid Cypher query based on the schema below.
+
+            {history_context}
 
             SCHEMA:
             {self.schema}
@@ -63,6 +74,7 @@ class ResponseGenerator:
                - Example: `MATCH (m:BMWModel:ElectricCar)` is valid.
             7. **Return Clause:** You MUST end the query with a `RETURN` clause showing the relevant model names or properties.
                - Default: `RETURN m.name`
+            8. **Context Awareness:** If the user asks a follow-up question (e.g., "What about the iX?"), use the CHAT HISTORY to resolve pronouns or incomplete context.
 
             EXAMPLE INPUT:
             "Show me all electric SUVs"
@@ -72,7 +84,6 @@ class ResponseGenerator:
         """)
 
         try:
-            # logger.debug(f"Using base_url: {self.client.base_url}") # Optional verbose log
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[
@@ -125,22 +136,20 @@ class ResponseGenerator:
             logger.error(f"Error fixing Cypher: {e}")
             return ""
 
-    def generate_response(self, question):
-        # Generate Initial Cypher
-        cypher_query = self.generate_cypher(question)
+    def generate_response(self, question, chat_history=None):
+        cypher_query = self.generate_cypher(question, chat_history)
         logger.info(f"Generated Cypher: {cypher_query}")
 
         if not cypher_query:
             return "Sorry, I couldn't generate a query for that request."
 
-        # Execute Query with Retry Loop
         results = None
         max_retries = 3
 
         for attempt in range(max_retries + 1):
             try:
                 results = self.db.query(cypher_query)
-                break  # Success!
+                break
             except Exception as e:
                 error_message = str(e)
                 logger.warning(
@@ -148,7 +157,6 @@ class ResponseGenerator:
                 )
 
                 if attempt < max_retries:
-                    # Try to fix it
                     new_cypher = self.fix_cypher(question, cypher_query, error_message)
                     if new_cypher:
                         logger.info(f"Retrying with fixed Cypher: {new_cypher}")
@@ -170,7 +178,6 @@ class ResponseGenerator:
                 "I couldn't find any information matching your request in the database."
             )
 
-        # Generate Natural Language Response
         if not self.client:
             return str(results)
 
