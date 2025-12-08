@@ -1,3 +1,5 @@
+"""Graph loader utility for loading Cypher files into Neo4j."""
+
 import logging
 import os
 from typing import LiteralString, cast
@@ -9,27 +11,27 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 logger = logging.getLogger(__name__)
-
 logging.getLogger("neo4j.notifications").setLevel(logging.WARNING)
 
-NEO4J_URI = os.environ.get("NEO4J_URI", "bolt://localhost:7687")
-NEO4J_USER = os.environ.get("NEO4J_USER", "neo4j")
-NEO4J_PASSWORD = os.environ.get("NEO4J_PASSWORD", "password")
+# Default connection settings
+DEFAULT_URI = "bolt://localhost:7687"
+DEFAULT_USER = "neo4j"
+DEFAULT_PASSWORD = "password"
 
 
 class GraphLoader:
-    def __init__(self, uri, user, password):
+    def __init__(self, uri: str, user: str, password: str) -> None:
         self.driver = GraphDatabase.driver(uri, auth=(user, password))
 
-    def close(self):
+    def close(self) -> None:
         self.driver.close()
 
-    def clear_database(self):
+    def clear_database(self) -> None:
         with self.driver.session() as session:
             session.run("MATCH (n) DETACH DELETE n")
             logger.info("Database cleared.")
 
-    def load_cypher(self, file_path):
+    def load_cypher(self, file_path: str) -> None:
         if not os.path.exists(file_path):
             logger.error(f"File {file_path} not found.")
             return
@@ -47,11 +49,16 @@ class GraphLoader:
                         count += 1
                     except Exception as e:
                         logger.error(f"Error executing query: {query[:50]}... \n{e}")
+
             logger.info(f"Executed {count} queries from {file_path}")
 
 
-def main():
-    loader = GraphLoader(NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD)
+def main() -> None:
+    uri = os.environ.get("NEO4J_URI", DEFAULT_URI)
+    user = os.environ.get("NEO4J_USER", DEFAULT_USER)
+    password = os.environ.get("NEO4J_PASSWORD", DEFAULT_PASSWORD)
+
+    loader = GraphLoader(uri, user, password)
     try:
         loader.clear_database()
         loader.load_cypher("graph_data.cypher")

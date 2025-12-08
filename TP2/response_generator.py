@@ -1,3 +1,5 @@
+"""Response generator using LLM and Neo4j knowledge graph."""
+
 import logging
 import os
 import textwrap
@@ -8,14 +10,29 @@ from database import Neo4jDatabase
 
 logger = logging.getLogger(__name__)
 
+# Default LLM settings
+DEFAULT_MODEL = "gpt-3.5-turbo"
+DEFAULT_BASE_URL = "https://api.openai.com/v1"
+
+# Retry settings
+MAX_QUERY_RETRIES = 3
+
+# LLM temperature settings
+CYPHER_GENERATION_TEMPERATURE = 0.5
+CYPHER_FIX_TEMPERATURE = 0.2
+
 
 class ResponseGenerator:
-    def __init__(self):
-        self.db = Neo4jDatabase()
 
+    def __init__(self) -> None:
+        self.db = Neo4jDatabase()
+        self._init_llm_client()
+        self.schema = self._load_schema()
+
+    def _init_llm_client(self) -> None:
         self.api_key = os.environ.get("LLM_API_KEY")
-        self.model = os.environ.get("LLM_MODEL", "gpt-3.5-turbo")
-        self.base_url = os.environ.get("LLM_BASE_URL", "https://api.openai.com/v1")
+        self.model = os.environ.get("LLM_MODEL", DEFAULT_MODEL)
+        self.base_url = os.environ.get("LLM_BASE_URL", DEFAULT_BASE_URL)
 
         if self.api_key:
             self.client = OpenAI(api_key=self.api_key, base_url=self.base_url)
@@ -23,31 +40,25 @@ class ResponseGenerator:
             logger.warning("No API key found in environment variables")
             self.client = None
 
-        self.schema = self._load_schema()
-
-    def _load_schema(self):
+    def _load_schema(self) -> str:
         try:
             with open("schema.txt", "r") as f:
                 return f.read()
-        except Exception:
+        except FileNotFoundError:
             logger.error("Schema file not found.")
             return "Schema file not found."
 
-    def generate_cypher(self, question, chat_history=None):
-        if not self.client:
-            return "MATCH (n) RETURN n LIMIT 5"
+    def _build_history_context(self, chat_history: list[dict] | None) -> str:
+        if not chat_history:
+            return ""
 
-        if chat_history is None:
-            chat_history = []
+        history_str = "\n".join(
+            [f"{msg['role'].upper()}: {msg['content']}" for msg in chat_history]
+        )
+        return f"\nCHAT HISTORY:\n{history_str}\n"
 
-        history_context = ""
-        if chat_history:
-            history_str = "\n".join(
-                [f"{msg['role'].upper()}: {msg['content']}" for msg in chat_history]
-            )
-            history_context = f"\nCHAT HISTORY:\n{history_str}\n"
-
-        system_prompt = textwrap.dedent(f"""
+    def _get_cypher_system_prompt(self, history_context: str) -> str:
+        return textwrap.dedent(f"""
             You are an expert Neo4j Cypher query generator.
             Your task is to convert the user's natural language question into a valid Cypher query based on the schema below.
 
@@ -83,6 +94,18 @@ class ResponseGenerator:
             MATCH (m:BMWModel:ElectricCar)-[:HAS_BODY_TYPE]->(:BodyType {{name: 'SUV'}}) RETURN m.name
         """)
 
+    def _clean_cypher_response(self, cypher: str) -> str:
+        return cypher.replace("```cypher", "").replace("```", "").strip()
+
+    def generate_cypher(
+        self, question: str, chat_history: list[dict] | None = None
+    ) -> str:
+        if not self.client:
+            return "MATCH (n) RETURN n LIMIT 5"
+
+        history_context = self._build_history_context(chat_history)
+        system_prompt = self._get_cypher_system_prompt(history_context)
+
         try:
             response = self.client.chat.completions.create(
                 model=self.model,
@@ -90,17 +113,19 @@ class ResponseGenerator:
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": question},
                 ],
-                temperature=0.5,
+                temperature=CYPHER_GENERATION_TEMPERATURE,
             )
             cypher = response.choices[0].message.content.strip()
-            cypher = cypher.replace("```cypher", "").replace("```", "").strip()
-            return cypher
+            return self._clean_cypher_response(cypher)
         except Exception as e:
             logger.error(f"Error generating Cypher: {e}")
             return ""
 
-    def fix_cypher(self, question, invalid_cypher, error_message):
+    def fix_cypher(
+        self, question: str, invalid_cypher: str, error_message: str
+    ) -> str:
         logger.info(f"Attempting to fix Cypher. Error: {error_message}")
+
         system_prompt = textwrap.dedent(f"""
             You are an expert Neo4j Cypher query corrector.
             Your task is to FIX the Cypher query based on the error message and the schema.
@@ -127,60 +152,43 @@ class ResponseGenerator:
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_content},
                 ],
-                temperature=0.2,
+                temperature=CYPHER_FIX_TEMPERATURE,
             )
             cypher = response.choices[0].message.content.strip()
-            cypher = cypher.replace("```cypher", "").replace("```", "").strip()
-            return cypher
+            return self._clean_cypher_response(cypher)
         except Exception as e:
             logger.error(f"Error fixing Cypher: {e}")
             return ""
 
-    def generate_response(self, question, chat_history=None):
-        cypher_query = self.generate_cypher(question, chat_history)
-        logger.info(f"Generated Cypher: {cypher_query}")
+    def _execute_query_with_retry(
+        self, question: str, cypher_query: str
+    ) -> tuple[list | None, str | None]:
+        current_query = cypher_query
 
-        if not cypher_query:
-            return "Sorry, I couldn't generate a query for that request."
-
-        results = None
-        max_retries = 3
-
-        for attempt in range(max_retries + 1):
+        for attempt in range(MAX_QUERY_RETRIES + 1):
             try:
-                results = self.db.query(cypher_query)
-                break
+                results = self.db.query(current_query)
+                return results, None
             except Exception as e:
                 error_message = str(e)
                 logger.warning(
-                    f"Query failed (Attempt {attempt + 1}/{max_retries + 1}): {error_message}"
+                    f"Query failed (Attempt {attempt + 1}/{MAX_QUERY_RETRIES + 1}): {error_message}"
                 )
 
-                if attempt < max_retries:
-                    new_cypher = self.fix_cypher(question, cypher_query, error_message)
+                if attempt < MAX_QUERY_RETRIES:
+                    new_cypher = self.fix_cypher(question, current_query, error_message)
                     if new_cypher:
                         logger.info(f"Retrying with fixed Cypher: {new_cypher}")
-                        cypher_query = new_cypher
+                        current_query = new_cypher
                     else:
-                        return f"I encountered an error and couldn't fix it automatically. Error: {error_message}"
-                else:
-                    logger.error(
-                        f"Final query failure after retries. Last error: {error_message}"
-                    )
-                    return f"I tried to answer your question multiple times but encountered errors. Last error: {error_message}"
+                        return None, f"I encountered an error and couldn't fix it automatically. Error: {error_message}"
 
-        if not results:
-            if results is None:
-                logger.error("Unexpected None results from db query.")
-                return "An unexpected error occurred during query execution."
+        logger.error(f"Final query failure after retries. Last error: {error_message}")
+        return None, f"I tried to answer your question multiple times but encountered errors. Last error: {error_message}"
 
-            return (
-                "I couldn't find any information matching your request in the database."
-            )
-
-        if not self.client:
-            return str(results)
-
+    def _format_response_with_llm(
+        self, question: str, results: list[dict]
+    ) -> str:
         system_prompt = textwrap.dedent("""
             You are a knowledgeable and professional BMW assistant.
             Answer the user's question directly using the provided context.
@@ -216,5 +224,30 @@ class ResponseGenerator:
             logger.error(f"Error generating response: {e}")
             return f"Error generating response: {e}"
 
-    def close(self):
+    def generate_response(
+        self, question: str, chat_history: list[dict] | None = None
+    ) -> str:
+        cypher_query = self.generate_cypher(question, chat_history)
+        logger.info(f"Generated Cypher: {cypher_query}")
+
+        if not cypher_query:
+            return "Sorry, I couldn't generate a query for that request."
+
+        results, error = self._execute_query_with_retry(question, cypher_query)
+
+        if error:
+            return error
+
+        if not results:
+            if results is None:
+                logger.error("Unexpected None results from db query.")
+                return "An unexpected error occurred during query execution."
+            return "I couldn't find any information matching your request in the database."
+
+        if not self.client:
+            return str(results)
+
+        return self._format_response_with_llm(question, results)
+
+    def close(self) -> None:
         self.db.close()
